@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
         'password',
     ];
@@ -41,4 +42,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // החזרה של שדה חדש שמקמפל בתוכו 2 שדות יחד
+    public function getFullNameAttribute(){
+        return $this->name . ' ' . $this->surname;
+    }
+
+    // החלפה של המידע לפני שמירה
+    public function setNameAttribute($value){
+        $this->attributes['name'] = ucfirst($value);
+    }
+    public function setSurameAttribute($value){
+        $this->attributes['surname'] = ucfirst($value);
+    }
 }
