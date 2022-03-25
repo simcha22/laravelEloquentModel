@@ -43,6 +43,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function articles(){
+        return $this->hasMany(Article::class);
+    }
+
     // החזרה של שדה חדש שמקמפל בתוכו 2 שדות יחד
     public function getFullNameAttribute(){
         return $this->name . ' ' . $this->surname;
